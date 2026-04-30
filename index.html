@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>DJ Lautaro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:black;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* PARTICULAS */
+canvas#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 50px;
+  background:rgba(0,0,0,0.8);
+  position:sticky;
+  top:0;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:900;
+  color:#00f7ff;
+}
+
+.nav a{
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+}
+
+.nav a:hover{
+  color:#00f7ff;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:90px;
+  animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 20px #00f7ff;}
+  to{ text-shadow:0 0 60px #00f7ff;}
+}
+
+/* PLAYER */
+.player{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:20px;
+}
+
+#playBtn{
+  background:#00f7ff;
+  border:none;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#progress{
+  width:300px;
+}
+
+#volume{
+  width:100px;
+}
+
+/* VISUALIZADOR */
+.visualizer{
+  width:100%;
+  height:200px;
+  display:flex;
+  justify-content:center;
+}
+
+#audioVisualizer{
+  width:90%;
+  height:200px;
+}
+
+/* SECCIONES */
+.section{
+  padding:100px 40px;
+  text-align:center;
+}
+
+.section h2{
+  color:#00f7ff;
+}
+
+/* CARDS PRO */
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+
+.card{
+  background:#111;
+  padding:30px;
+  border-radius:20px;
+  width:260px;
+  transition:0.4s;
+  box-shadow:0 0 15px rgba(0,247,255,0.2);
+
+  position:relative;
+  overflow:hidden;
+
+  opacity:0;
+  transform:translateY(50px);
+  animation:fadeUp 1s forwards;
+}
+
+.card:hover{
+  transform:translateY(-15px) scale(1.08);
+  box-shadow:0 0 40px rgba(0,247,255,0.9), 0 0 80px rgba(0,247,255,0.5);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(120deg, transparent, rgba(0,247,255,0.3), transparent);
+  opacity:0;
+  transition:0.4s;
+}
+
+.card:hover::before{
+  opacity:1;
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.telefono{
+  font-size:30px;
+  color:#00f7ff;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:0.6;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="logo">DJ LAUTARO</div>
+  <div>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#redes">Redes</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <h1>DJ LAUTARO 🎧</h1>
+  <p>Música • Mezclas • Eventos</p>
+
+  <div class="player">
+    <button id="playBtn">▶️</button>
+    <input type="range" id="progress" value="0">
+    <span id="currentTime">0:00</span> /
+    <span id="duration">0:00</span>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
+</section>
+
+<!-- VISUALIZADOR -->
+<div class="visualizer">
+  <canvas id="audioVisualizer"></canvas>
+</div>
+
+<!-- SERVICIOS CON CARDS -->
+<section class="section" id="servicios">
+  <h2>Servicios</h2>
+
+  <div class="cards">
+    <div class="card" style="animation-delay:0.2s">
+      <h3>Fiestas 🎉</h3>
+      <p>Música para cumpleaños y eventos</p>
+    </div>
+
+    <div class="card" style="animation-delay:0.4s">
+      <h3>Mezclas 🎧</h3>
+      <p>Sets con transiciones profesionales</p>
+    </div>
+
+    <div class="card" style="animation-delay:0.6s">
+      <h3>Ambiente 🔥</h3>
+      <p>Hago que tu fiesta sea inolvidable</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="redes">
+  <h2>Redes</h2>
+  <p>Instagram: lautivv DJ LAUTARO</p>
+  <p>YouTube: DJ LAUTARO</p>
+  <p>Gmail: dj.lautaro.entufiesta@gmail.com</p>
+</section>
+
+<section class="section" id="contacto">
+  <h2>Contacto</h2>
+  <div class="telefono">+56931091330</div>
+</section>
+
+<footer>© 2026 DJ Lautaro</footer>
+
+<!-- AUDIO -->
+<audio id="music">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const volume = document.getElementById("volume");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
+
+let audioCtx, analyser, source, dataArray;
+
+playBtn.onclick = () => {
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    source = audioCtx.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 128;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+  }
+
+  if(audio.paused){
+    audio.play();
+    playBtn.textContent="⏸️";
+    animate();
+  }else{
+    audio.pause();
+    playBtn.textContent="▶️";
+  }
+};
+
+audio.onloadedmetadata = () => {
+  progress.max = audio.duration;
+  duration.textContent = formatTime(audio.duration);
+};
+
+audio.ontimeupdate = () => {
+  progress.value = audio.currentTime;
+  currentTime.textContent = formatTime(audio.currentTime);
+};
+
+progress.oninput = () => {
+  audio.currentTime = progress.value;
+};
+
+volume.oninput = () => {
+  audio.volume = volume.value;
+};
+
+function formatTime(time){
+  let min = Math.floor(time/60);
+  let sec = Math.floor(time%60);
+  if(sec<10) sec="0"+sec;
+  return min+":"+sec;
+}
+
+/* VISUALIZADOR */
+const canvas = document.getElementById("audioVisualizer");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = 200;
+
+function animate(){
+  requestAnimationFrame(animate);
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  let barWidth = (canvas.width / dataArray.length) * 2;
+  let x = 0;
+
+  for(let i=0;i<dataArray.length;i++){
+    let barHeight = dataArray[i];
+    ctx.fillStyle="#00f7ff";
+    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+    x += barWidth + 2;
+  }
+}
+
+/* PARTICULAS */
+const pcanvas = document.getElementById("particles");
+const pctx = pcanvas.getContext("2d");
+
+pcanvas.width = window.innerWidth;
+pcanvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*pcanvas.width,
+    y:Math.random()*pcanvas.height,
+    size:Math.random()*3,
+    speed:Math.random()*1
+  });
+}
+
+function animateParticles(){
+  pctx.clearRect(0,0,pcanvas.width,pcanvas.height);
+
+  particles.forEach(p=>{
+    p.y += p.speed;
+    if(p.y > pcanvas.height) p.y = 0;
+    pctx.fillStyle="#00f7ff";
+    pctx.fillRect(p.x,p.y,p.size,p.size);
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+</script>
+
+</body>
+</html>
